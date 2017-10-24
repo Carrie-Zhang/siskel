@@ -17,16 +17,14 @@ var Movies = Backbone.Collection.extend({
 
   initialize: function() {
     // your code here
-    this.on('change', function() {
-      this.sort();
-    }, this);
+    this.on('change', this.sort, this);
   },
 
   comparator: 'title',
 
   sortByField: function(field) {
-    this.sort(field);
     this.comparator = field;
+    this.sort(field);
     // your code here
   }
 
@@ -35,7 +33,8 @@ var Movies = Backbone.Collection.extend({
 var AppView = Backbone.View.extend({
 
   events: {
-    'click form input': 'handleClick'
+    'click form input': 'handleClick',
+    
   },
 
   handleClick: function(e) {
@@ -65,7 +64,7 @@ var MovieView = Backbone.View.extend({
 
   initialize: function() {
     // your code here
-    this.render();
+    this.model.on('change', this.render, this);
   },
 
   events: {
@@ -88,7 +87,7 @@ var MoviesView = Backbone.View.extend({
 
   initialize: function() {
     // your code here
-    this.on('sort', this.render());
+    this.collection.on('sort', this.render, this);
   },
 
   render: function() {
