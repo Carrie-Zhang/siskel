@@ -69,7 +69,7 @@ var MovieView = Backbone.View.extend({
 
   events: {
     'click button': 'handleClick'
-  },
+  
 
   handleClick: function() {
     // your code here
